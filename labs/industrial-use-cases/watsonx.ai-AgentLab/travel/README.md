@@ -4,11 +4,16 @@ In this lab we will create an agent using watsonx.ai Agent Lab. Before diving in
 
 
 ## Table of Contents 📋
-- [Overview of Agent Lab 🤖](#overview-of-agent-lab)
-    - [Main Strengths 💪](#main-strengths)
-- [Step 1 - Build a vacation-planning agent with Agent Lab 😎](#build-a-vacation-planning-agent-with-agent-lab)
-- [Step 2 - Deploy the agent using 1-click deployment 🚀](#deploy-the-agent-using-1-click-deployment)
-- [Additional tips for implementing various use cases in Agent Lab 💡](#additional-tips-for-implementing-various-use-cases-in-agent-lab)
+- [Vacation Planer Agent Lab: Build an Agent with wx.ai Agent Lab](#vacation-planer-agent-lab-build-an-agent-with-wxai-agent-lab)
+  - [Table of Contents 📋](#table-of-contents-)
+- [Overview of Agent Lab](#overview-of-agent-lab)
+  - [Main Strengths:](#main-strengths)
+- [](#)
+- [Build a vacation-planning agent with Agent Lab](#build-a-vacation-planning-agent-with-agent-lab)
+- [](#-1)
+- [Deploy the agent using 1-click deployment](#deploy-the-agent-using-1-click-deployment)
+    - [Yay!!! Now you have officially completed Lab! 🚀](#yay-now-you-have-officially-completed-lab-)
+- [Additional tips for implementing various use cases in Agent Lab](#additional-tips-for-implementing-various-use-cases-in-agent-lab)
 
 
 # Overview of Agent Lab
@@ -36,25 +41,25 @@ Below are some of the Agent Lab strengths that you can can use when demoing this
 # Build a vacation-planning agent with Agent Lab
 
 If this is your first time in this account, you will need to first create a project to be able to start using Agent Lab. Once you created a project, go to that project, then go to the Assets tab and click on New asset. 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/1-new asset-updated.png">
+![image](./images/1-new%20asset-updated.png)
 
 
 Then from the list of assets, click on **"Build an AI agent to automate tasks"**.
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/2-asset - agent lab-updated.png">
+![image](./images/2-asset%20-%20agent%20lab-updated.png)
 
 
 When opening the Agent Lab for the first time, you will need to associate it with an ai runtime service. Click on Associate service.
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/3-associate s.png">
+![image](./images/3-associate%20s.png)
 
 Select the available runtime and click on Associate.
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/4-associate s.png">
+![image](./images/4-associate%20s.png)
 
 Then go back to the tab for creating a new asset and start your Agent Lab asset. This brings us to the main page for cretaing an agent with the Agent Lab.
 Here, on the left side of the screen under **"Build"**, you can set up and configure your agent, and on the right side under **"Agent preview"** you will see how those changes are going to be reflected in the agent.
 
 When deifning the agent on the "Build" side, you can select the LLM and change the model parameters (e.g. temperature, max token, etc.). By clicking on Setup, you can define the name of the agent and provide a short description of what is does.
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/5-setup-updated.png">
+![image](./images/5-setup-updated.png)
 
 Then lower on the Build side, you can "Configure" the agent by selecting the Framework and the Architecture. Currently LangGrpah is the only Framework available and ReAct is the only Architecture available. More frameworks and architectures will be added to the Agent Lab in future releases.
 
@@ -76,38 +81,33 @@ In this example, we are building a Travel Concierge agent that helps the users p
 *If you were asked question about the weather of a travel destination, use Weather tool to get real time weather of a city to facilitate making of travel plans.*
 """
 
-<p align="center">
- <img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/6-agent config-v2-updated.png" width="75%">
-</p>
+![image](./images/6-agent%20config-v2-updated.png)
 
 
 Then you can select the tools that you want this agent to have. Google Search is the default tool. you can click on Select Tool to choose from a list of available tools. For the Travel Cocierge agent, we will use two tools, Google Search and Weather.
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/7-select tools-v2.png">
+![image](./images/7-select%20tools-v2.png)
 
 Once you are done with defining your agent, you can save your work as an Agent and come back and edit it again later, or save it as a deployment notebook that would give you a nice notebook starting point for further customization.
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/8-save agent-v2.png">
+![image](./images/8-save%20agent-v2.png)
 
 Now, let's test our agent! First, we will ask it to plan our vacation given a specific budget. In the Preview section on the right, test the following question.
 
 Question: *"Give me a detailed 5-day vacation plan to San Francisco, CA with budget limit of $5000."*
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/detailed travel plan.png">
+![image](./images/detailed%20travel%20plan.png)
 
 If we go to the end of the response from our agent, we can click on __"How did I get this answer?"__ to gain an insight into what tool our agent has used and how the output is generated. In this case, we can see that the agent is correctly using Google Search to find the relevant information and plan our vacation.
 
-<p align="center">
- <img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/travel plan- tool result-updated.png" width="75%">
-</p>
+![image](./images/travel%20plan-%20tool%20result-updated.png)
+
 
 Let's try another example in which the agent should use the Weather tool.
 
 Question: *"How is the weather in SF from March 5 to March 10?"*
 
-<p align="center">
- <img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/SF weather results.png" width="75%">
-</p>
+![image](./images/SF%20weather%20results.png)
 
 Nice! The agent is using the weather tool now. So our agent was successful in choosing the right tool for both user requests.
 
@@ -116,21 +116,19 @@ Nice! The agent is using the weather tool now. So our agent was successful in ch
 
 Once you are happy with your agent's performance, you can deploy your agent as an AI service using Agent Lab's 1-click deployment. To do so click on the Deploy icon on the top right of your agent lab page. The Deploy page opens (see below). To continue, you first need to "Create" an API key. Click on "Create". 
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/10-deploy-updated.png">
+![image](./images/10-deploy-updated.png)
 
 This will take you to another page to create your API key. __Create and Save your API Key. You will need this API Key in order to integrate your Travel Concierge agent into Watsonx Orchestrator.__
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/11-create key.png">
+![image](./images/11-create%20key.png)
 
 Copy the API key and save it somewhere or click download to save it. You won’t be able to see this API key again, so you can’t retrieve it later.
 
-<p align="center">
- <img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/save API Key.png" width="60%">
-</p>
+![image](./images/save%20API%20Key.png)
 
 After you created and saved your API Key, go back to the page for "Deploy as an AI Service". Now the "Create" link is replaced with "Reload". Click on "Reload" to reload your API Key. 
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/relaod-key-new-dep-space-updated.png">
+![image](./images/relaod-key-new-dep-space-updated.png)
 
 ---
 
@@ -151,15 +149,15 @@ After you created and saved your API Key, go back to the page for "Deploy as an 
 
 Next you need to create a new deployment space. Click on "New Deployment Space" to go to the page for creating a new deployment space. On this page, name the space, set the deployment stage, and select the runtime service from the drop down menu. Then click on "Create" to create your new space.
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/13-create deployment space.png">
+![image](./images/13-create%20deployment%20space.png)
 
 When the deployment space is ready, go back to the "Deploy as as AI Service" page and "Reload" the deployment space. Then click on Deploy.
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/15-ready to deploy.png">
+![image](./images/15-ready%20to%20deploy.png)
 
 The deployment will initialize and after a couple of minutes the status will change to "Deployed".
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/17-deployed.png">
+![image](./images/17-deployed.png)
 
 ---
 
@@ -180,17 +178,17 @@ The deployment will initialize and after a couple of minutes the status will cha
 
 Once deployed, click on the agent name to see the information about this deployment (see below). You can find your deployment ID on the right panel. __Save your Deployment ID as you will need it for future integration with your Travel Concierge agent into Watsonx Orchestrate.__
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/18-deployment info-updated.png">
+![image](./images/18-deployment%20info-updated.png)
 
 In order to implement our Travel Concierge agent as an external agent in Watsonx Orchestrate, in addition to API Key and Deployment ID, we also need the Service URL and the Space ID. The URL can also be found in the beginning part of the endpoints from the deployment info page, i.e. "https://us-south.ml.cloud.ibm.com".
 
 Now, you only need the __Space ID__ to have all the required information from Lab 1. For Space ID, from hamburger menu on top left, go to "Deployments". Then click on the “Spaces” tab and click on the deployment space you created.  
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/space ID-1.png">
+![image](./images/space%20ID-1.png)
 
 In your deployment space, click on the "Manage" tab, and save your Space ID for using it later in Lab 3 and 4.
 
-<img src="https://github.ibm.com/skol-assets/watsonx-ai-agents-class/blob/main/lab1/images/space ID-2-updated.png">
+![image](./images/space%20ID-2-updated.png)
 
 ### Yay!!! Now you have officially completed Lab! 🚀
 
