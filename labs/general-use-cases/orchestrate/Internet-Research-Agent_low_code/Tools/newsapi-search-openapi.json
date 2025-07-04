@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NewsAPI Search Tool",
+    "version": "1.0.0",
+    "description": "Real news search using NewsAPI - free tier available"
+  },
+  "servers": [
+    {
+      "url": "https://newsapi.org/v2",
+      "description": "NewsAPI Service"
+    }
+  ],
+  "paths": {
+    "/everything": {
+      "get": {
+        "summary": "Search news articles",
+        "description": "Search for current news articles",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "NewsAPI key (get free at newsapi.org)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "GET-YOUR-NewsAPI.org-KEY-HERE"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of results",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "relevancy"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "News search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "totalResults": {
+                      "type": "integer"
+                    },
+                    "articles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "publishedAt": {
+                            "type": "string"
+                          },
+                          "source": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

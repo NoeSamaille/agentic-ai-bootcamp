@@ -1,0 +1,77 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Hotel Booking Confirmation",
+      "version": "1.0.0",
+      "description": "Confirms a hotel booking and returns a booking confirmation ID and support email. No authentication required."
+    },
+    "servers": [
+      {
+        "url": "https://7zrna39a4k.execute-api.eu-north-1.amazonaws.com/Prod",
+        "description": "Production Endpoint"
+      }
+    ],
+    "paths": {
+      "/confirm-booking": {
+        "post": {
+          "summary": "Confirm hotel booking",
+          "description": "Accepts hotel selection, stay dates, guest count, and returns booking confirmation.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hotel": { "type": "string", "example": "Elegant Retreat" },
+                    "check_in": { "type": "string", "format": "date", "example": "2025-07-01" },
+                    "check_out": { "type": "string", "format": "date", "example": "2025-07-04" },
+                    "adults": { "type": "integer", "example": 2 },
+                    "children": { "type": "integer", "example": 1 },
+                    "rooms": { "type": "integer", "example": 1 }
+                  },
+                  "required": ["hotel", "check_in", "check_out", "adults", "children", "rooms"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Booking confirmed successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": { "type": "string" },
+                      "hotel": { "type": "string" },
+                      "check_in": { "type": "string", "format": "date" },
+                      "check_out": { "type": "string", "format": "date" },
+                      "nights": { "type": "integer" },
+                      "rooms": { "type": "integer" },
+                      "adults": { "type": "integer" },
+                      "children": { "type": "integer" },
+                      "rate_per_night": { "type": "integer" },
+                      "estimated_total": { "type": "integer" },
+                      "confirmation_id": { "type": "string" },
+                      "support_email": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input or date range",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "Invalid check-in/check-out dates"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }  

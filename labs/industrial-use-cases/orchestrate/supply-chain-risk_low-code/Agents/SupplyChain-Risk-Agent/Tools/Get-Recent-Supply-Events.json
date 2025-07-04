@@ -1,0 +1,79 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Get Recent Supply Chain Events",
+    "version": "1.0.0",
+    "description": "Fetches the most recent supply chain events from Merck's supply chain monitoring system. No authentication required."
+  },
+  "servers": [
+    {
+      "url": "https://wx-supply-chain-backend.1944johjccn7.eu-de.codeengine.appdomain.cloud",
+      "description": "Merck Supply Chain Backend"
+    }
+  ],
+  "paths": {
+    "/events": {
+      "get": {
+        "summary": "Get recent supply chain events",
+        "description": "Retrieves the most recent supply chain disruption events including shipment delays, quality issues, customs holds, and material shortages.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of events to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of recent supply chain events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "event_id": { "type": "string", "example": "EVT-3dac06c2" },
+                      "timestamp": { "type": "string", "format": "date-time" },
+                      "supplier_id": { "type": "string", "example": "SUP-001" },
+                      "supplier_name": { "type": "string", "example": "Acme PharmaChem" },
+                      "material_id": { "type": "string", "example": "MAT-123" },
+                      "material_description": { "type": "string", "example": "Active Ingredient X" },
+                      "event_type": { 
+                        "type": "string", 
+                        "enum": ["shipment_delay", "quality_issue", "customs_hold", "raw_material_shortage", "transport_strike"],
+                        "example": "shipment_delay" 
+                      },
+                      "delay_hours": { "type": "integer", "nullable": true, "example": 24 },
+                      "eta_original": { "type": "string", "format": "date-time", "nullable": true },
+                      "eta_new": { "type": "string", "format": "date-time", "nullable": true },
+                      "location": { "type": "string", "nullable": true, "example": "Hamburg Port" },
+                      "disruption_reason": { "type": "string", "nullable": true, "example": "Port congestion" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Failed to fetch events from database"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Weather Forecast API",
+      "version": "1.0.0",
+      "description": "Provides current weather information for any location."
+    },
+    "paths": {
+      "/v1/forecast": {
+        "get": {
+          "summary": "Get current weather information",
+          "parameters": [
+            {
+              "name": "latitude",
+              "in": "query",
+              "description": "Latitude of the location",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "format": "float"
+              }
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "description": "Longitude of the location",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "format": "float"
+              }
+            },
+            {
+              "name": "current_weather",
+              "in": "query",
+              "description": "Include current weather data",
+              "required": true,
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Current weather data retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": { "type": "number" },
+                      "longitude": { "type": "number" },
+                      "generationtime_ms": { "type": "number" },
+                      "utc_offset_seconds": { "type": "integer" },
+                      "timezone": { "type": "string" },
+                      "timezone_abbreviation": { "type": "string" },
+                      "elevation": { "type": "number" },
+                      "current_weather": {
+                        "type": "object",
+                        "properties": {
+                          "temperature": { "type": "number" },
+                          "windspeed": { "type": "number" },
+                          "winddirection": { "type": "number" },
+                          "weathercode": { "type": "integer" },
+                          "is_day": { "type": "integer" },
+                          "time": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "https://api.open-meteo.com",
+        "description": "Open-Meteo API"
+      }
+    ]
+  }
+  

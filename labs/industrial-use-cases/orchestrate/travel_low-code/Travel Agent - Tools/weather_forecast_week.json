@@ -1,0 +1,140 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Open-Meteo Weather Forecast API",
+      "version": "1.0.0",
+      "description": "Provides weather forecasts for any location worldwide, up to 16 days ahead."
+    },
+    "servers": [
+      {
+        "url": "https://api.open-meteo.com/v1",
+        "description": "Open-Meteo API Server"
+      }
+    ],
+    "paths": {
+      "/forecast": {
+        "get": {
+          "summary": "Get weather forecast",
+          "description": "Retrieve weather forecasts for a specific location and date range.",
+          "parameters": [
+            {
+              "name": "latitude",
+              "in": "query",
+              "required": true,
+              "description": "Latitude of the location",
+              "schema": {
+                "type": "number",
+                "format": "float",
+                "example": 12.9716
+              }
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "required": true,
+              "description": "Longitude of the location",
+              "schema": {
+                "type": "number",
+                "format": "float",
+                "example": 77.5946
+              }
+            },
+            {
+              "name": "daily",
+              "in": "query",
+              "required": true,
+              "description": "Comma-separated list of daily weather variables",
+              "schema": {
+                "type": "string",
+                "example": "temperature_2m_max,temperature_2m_min,precipitation_sum"
+              }
+            },
+            {
+              "name": "timezone",
+              "in": "query",
+              "required": true,
+              "description": "Timezone for the data",
+              "schema": {
+                "type": "string",
+                "example": "Asia/Kolkata"
+              }
+            },
+            {
+              "name": "start_date",
+              "in": "query",
+              "required": true,
+              "description": "Start date of the forecast (YYYY-MM-DD)",
+              "schema": {
+                "type": "string",
+                "format": "date",
+                "example": "2025-05-04"
+              }
+            },
+            {
+              "name": "end_date",
+              "in": "query",
+              "required": true,
+              "description": "End date of the forecast (YYYY-MM-DD), up to 16 days ahead",
+              "schema": {
+                "type": "string",
+                "format": "date",
+                "example": "2025-05-14"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with weather forecast data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "latitude": { "type": "number" },
+                      "longitude": { "type": "number" },
+                      "generationtime_ms": { "type": "number" },
+                      "utc_offset_seconds": { "type": "integer" },
+                      "timezone": { "type": "string" },
+                      "timezone_abbreviation": { "type": "string" },
+                      "elevation": { "type": "number" },
+                      "daily_units": {
+                        "type": "object",
+                        "properties": {
+                          "time": { "type": "string" },
+                          "temperature_2m_max": { "type": "string" },
+                          "temperature_2m_min": { "type": "string" },
+                          "precipitation_sum": { "type": "string" }
+                        }
+                      },
+                      "daily": {
+                        "type": "object",
+                        "properties": {
+                          "time": {
+                            "type": "array",
+                            "items": { "type": "string", "format": "date" }
+                          },
+                          "temperature_2m_max": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                          },
+                          "temperature_2m_min": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                          },
+                          "precipitation_sum": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

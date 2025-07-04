@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Country Information API",
+      "version": "1.0.0",
+      "description": "Provides information about countries such as capital, region, population, and languages."
+    },
+    "paths": {
+      "/v3.1/name/{name}": {
+        "get": {
+          "summary": "Get country information by name",
+          "parameters": [
+            {
+              "name": "name",
+              "in": "path",
+              "description": "Full or partial name of the country",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Country information retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "object",
+                          "properties": {
+                            "common": { "type": "string" },
+                            "official": { "type": "string" }
+                          }
+                        },
+                        "capital": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        },
+                        "region": { "type": "string" },
+                        "population": { "type": "integer" },
+                        "languages": {
+                          "type": "object",
+                          "additionalProperties": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "https://restcountries.com",
+        "description": "REST Countries API"
+      }
+    ]
+  }  

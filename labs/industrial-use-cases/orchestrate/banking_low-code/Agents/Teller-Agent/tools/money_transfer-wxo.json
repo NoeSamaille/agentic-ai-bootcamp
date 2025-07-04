@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Money Transfer",
+    "version": "1.0.0",
+    "description": "Transfers money from one IBAN to another IBAN.",
+    "x-disclaimer": "IBM SAMPLE CODE DISCLAIMER\n\u00a9 Copyright IBM Corporation 2025. All Rights Reserved.\n\nThis sample code is provided solely for instructional use in IBM lab exercises. It is supplied \u201cAS IS,\u201d without warranties of any kind, express or implied, including (but not limited to) warranties of merchantability, fitness for a particular purpose, and non-infringement. IBM makes no commitment to update the code and assumes no responsibility for errors or omissions or for any damages arising out of its use.\n\nYou may copy, modify, and distribute this code in whole or in part, at your own risk, provided you retain this notice. The code is not part of any IBM product and is not officially supported by IBM. Use in production environments is entirely at your discretion and must comply with all applicable laws, regulations, and third-party license terms.\n\nIBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corporation. Other product and service names might be trademarks of IBM or other companies."
+  },
+  "servers": [
+    {
+      "url": "https://wxo-corebanking-backend.1944johjccn7.eu-de.codeengine.appdomain.cloud",
+      "description": "Production Endpoint"
+    }
+  ],
+  "paths": {
+    "/iban-transfer": {
+      "post": {
+        "summary": "Transfer money between IBANs",
+        "description": "Takes source IBAN, destination IBAN, and amount as input and performs a money transfer.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source_iban": {
+                    "type": "string",
+                    "example": "DE89320895326389021994"
+                  },
+                  "destination_iban": {
+                    "type": "string",
+                    "example": "DE89929842579913662103"
+                  },
+                  "amount_eur": {
+                    "type": "number",
+                    "example": 100.5
+                  },
+                  "username": {
+                    "type": "string",
+                    "default": "teller"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "teller123"
+                  }
+                },
+                "required": [
+                  "source_iban",
+                  "destination_iban",
+                  "amount_eur"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transfer completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "source_iban": {
+                      "type": "string"
+                    },
+                    "destination_iban": {
+                      "type": "string"
+                    },
+                    "amount_eur": {
+                      "type": "number"
+                    },
+                    "debit_tx": {
+                      "type": "string"
+                    },
+                    "credit_tx": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    },
+                    "new_balance_eur": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "IBAN not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": "Source or destination IBAN not found"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient funds",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": "Insufficient funds. Balance X, overdraft Y"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "detail": "Bad credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

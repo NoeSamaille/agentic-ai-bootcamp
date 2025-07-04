@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Product Hunt Alternative Endpoint",
+    "version": "1.0.0",
+    "description": "Alternative Product Hunt data access via different endpoint"
+  },
+  "servers": [
+    {
+      "url": "https://www.producthunt.com",
+      "description": "Product Hunt Public Pages"
+    }
+  ],
+  "paths": {
+    "/feed": {
+      "get": {
+        "summary": "Get Product Hunt feed data",
+        "description": "Access Product Hunt trending data via public feed",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Product category filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "productivity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product Hunt feed data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {"type": "string"},
+                          "tagline": {"type": "string"},
+                          "votes": {"type": "integer"},
+                          "url": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

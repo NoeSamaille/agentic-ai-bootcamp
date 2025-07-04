@@ -1,0 +1,77 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "List Hotels by City",
+      "version": "1.0.0",
+      "description": "Returns a list of premium hotels for a selected city. No authentication required."
+    },
+    "servers": [
+      {
+        "url": "https://6tnqyigi2d.execute-api.eu-north-1.amazonaws.com/Prod",
+        "description": "Production Endpoint"
+      }
+    ],
+    "paths": {
+      "/list-hotels": {
+        "post": {
+          "summary": "Get list of hotels in a city",
+          "description": "Takes a city as input and returns 5 randomly generated premium hotels.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string",
+                      "example": "Mumbai"
+                    }
+                  },
+                  "required": ["city"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "List of hotels successfully returned",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": { "type": "string" },
+                      "city": { "type": "string" },
+                      "hotels": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": { "type": "string" },
+                            "address": { "type": "string" },
+                            "phone": { "type": "string" },
+                            "rate_per_night": { "type": "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Missing or invalid input",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "Missing required field: city"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }  

@@ -1,0 +1,69 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Wikipedia Search API",
+    "version": "1.0.0",
+    "description": "Free Wikipedia search - no API key required, always works"
+  },
+  "servers": [
+    {
+      "url": "https://en.wikipedia.org/api/rest_v1",
+      "description": "Wikipedia API - Free and Reliable"
+    }
+  ],
+  "paths": {
+    "/page/summary/{title}": {
+      "get": {
+        "summary": "Get Wikipedia page summary",
+        "description": "Get summary information from Wikipedia",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "path",
+            "description": "Wikipedia page title (use search query)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wikipedia page summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "extract": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "content_urls": {
+                      "type": "object",
+                      "properties": {
+                        "desktop": {
+                          "type": "object",
+                          "properties": {
+                            "page": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

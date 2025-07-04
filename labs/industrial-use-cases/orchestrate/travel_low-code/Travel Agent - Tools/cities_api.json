@@ -1,0 +1,90 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "GeoNames Cities API",
+    "version": "1.0.0",
+    "description": "Retrieve major cities within a specified country."
+  },
+  "paths": {
+    "/searchJSON": {
+      "get": {
+        "summary": "Get cities by country code",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "description": "ISO 3166-1 alpha-2 country code",
+            "schema": {
+              "type": "string",
+              "example": "IN"
+            }
+          },
+          {
+            "name": "featureClass",
+            "in": "query",
+            "required": true,
+            "description": "Feature class to filter results (P for populated places)",
+            "schema": {
+              "type": "string",
+              "example": "P"
+            }
+          },
+          {
+            "name": "maxRows",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of rows to return",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "description": "Your GeoNames username",
+            "schema": {
+              "type": "string",
+              "example": "demo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of cities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "geonames": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "countryName": { "type": "string" },
+                          "population": { "type": "integer" },
+                          "lat": { "type": "string" },
+                          "lng": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://api.geonames.org",
+      "description": "GeoNames API Server"
+    }
+  ]
+}

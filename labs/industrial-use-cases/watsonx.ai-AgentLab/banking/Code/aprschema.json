@@ -1,0 +1,17 @@
+{
+  "principal": {
+    "title": "Principal loan amount",
+    "description": "The total loan amount",
+    "type": "number"
+  },
+  "interest_rate": {
+    "title": "Yearly interest rate",
+    "description": "The yearly interest rate to be charged",
+    "type": "number"
+  },
+  "period": {
+    "title": "Loan Period",
+    "description": "The length of the loan in years.",
+    "type": "integer"
+  }
+}

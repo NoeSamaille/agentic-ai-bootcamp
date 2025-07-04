@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "GitHub Trending API",
+    "version": "1.0.0",
+    "description": "Track innovation through GitHub trending repositories - often works in enterprise environments"
+  },
+  "servers": [
+    {
+      "url": "https://api.github.com",
+      "description": "GitHub API - Usually enterprise-friendly"
+    }
+  ],
+  "paths": {
+    "/search/repositories": {
+      "get": {
+        "summary": "Search trending GitHub repositories",
+        "description": "Find innovative tools and projects on GitHub",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query (e.g., 'productivity tools', 'AI assistant')",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "productivity tools"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "updated"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort direction",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Results per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GitHub repository search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_count": {"type": "integer"},
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "name": {"type": "string"},
+                          "full_name": {"type": "string"},
+                          "description": {"type": "string"},
+                          "html_url": {"type": "string"},
+                          "stargazers_count": {"type": "integer"},
+                          "forks_count": {"type": "integer"},
+                          "language": {"type": "string"},
+                          "created_at": {"type": "string"},
+                          "updated_at": {"type": "string"},
+                          "owner": {
+                            "type": "object",
+                            "properties": {
+                              "login": {"type": "string"},
+                              "type": {"type": "string"}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

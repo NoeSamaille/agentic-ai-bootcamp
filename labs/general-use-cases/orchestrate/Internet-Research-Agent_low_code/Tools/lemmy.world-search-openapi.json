@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Lemmy.world Search API",
+    "version": "1.0.0",
+    "description": "Search Lemmy.world for current discussions and posts - no authentication required"
+  },
+  "servers": [
+    {
+      "url": "https://lemmy.world/api/v3",
+      "description": "Lemmy.world API"
+    }
+  ],
+  "paths": {
+    "/search": {
+      "get": {
+        "summary": "Search Lemmy.world posts and comments",
+        "description": "Search for posts and discussions on Lemmy.world",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type_",
+            "in": "query",
+            "description": "Search type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Posts"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "TopAll"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "listing_type",
+            "in": "query",
+            "description": "Listing type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "All"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lemmy search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "posts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "post": {
+                            "type": "object",
+                            "properties": {
+                              "id": {"type": "integer"},
+                              "name": {"type": "string"},
+                              "body": {"type": "string"},
+                              "url": {"type": "string"},
+                              "published": {"type": "string"},
+                              "updated": {"type": "string"}
+                            }
+                          },
+                          "creator": {
+                            "type": "object",
+                            "properties": {
+                              "name": {"type": "string"}
+                            }
+                          },
+                          "community": {
+                            "type": "object",
+                            "properties": {
+                              "name": {"type": "string"},
+                              "title": {"type": "string"}
+                            }
+                          },
+                          "counts": {
+                            "type": "object",
+                            "properties": {
+                              "score": {"type": "integer"},
+                              "upvotes": {"type": "integer"},
+                              "downvotes": {"type": "integer"},
+                              "comments": {"type": "integer"}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

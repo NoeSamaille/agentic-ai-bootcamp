@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Direct City Name Weather Forecast",
+    "version": "1.0.0",
+    "description": "Get current weather and 3-day forecast using just city names like 'Hamburg', 'Berlin', 'London'. Completely free using wttr.in service - no API key or coordinates required."
+  },
+  "servers": [
+    {
+      "url": "https://wttr.in",
+      "description": "wttr.in Free Weather Service"
+    }
+  ],
+  "paths": {
+    "/{city}": {
+      "get": {
+        "summary": "Get weather forecast for any city by name",
+        "description": "Returns current weather conditions and 3-day forecast for any city worldwide. Simply provide the city name like 'Hamburg', 'Berlin', 'New York', etc. Works with international cities and provides detailed hourly forecasts.",
+        "parameters": [
+          {
+            "name": "city",
+            "in": "path",
+            "description": "City name (e.g., Hamburg, Berlin, London, New York, Tokyo, Sydney)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Hamburg"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format - use j1 for detailed JSON weather data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["j1"],
+              "default": "j1"
+            }
+          },
+          {
+            "name": "M",
+            "in": "query",
+            "description": "Use metric units (Celsius, km/h, mm) - leave empty for metric",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [""],
+              "default": ""
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Language for weather descriptions",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "en",
+              "enum": ["en", "de", "fr", "es", "it", "pt", "ru"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Weather forecast retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "current_condition": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "temp_C": { "type": "string", "example": "15", "description": "Current temperature in Celsius" },
+                          "temp_F": { "type": "string", "example": "59", "description": "Current temperature in Fahrenheit" },
+                          "FeelsLikeC": { "type": "string", "example": "18", "description": "Feels like temperature in Celsius" },
+                          "FeelsLikeF": { "type": "string", "example": "64", "description": "Feels like temperature in Fahrenheit" },
+                          "humidity": { "type": "string", "example": "72", "description": "Humidity percentage" },
+                          "precipMM": { "type": "string", "example": "0.0", "description": "Precipitation in mm" },
+                          "pressure": { "type": "string", "example": "1013", "description": "Atmospheric pressure in hPa" },
+                          "cloudcover": { "type": "string", "example": "75", "description": "Cloud cover percentage" },
+                          "uvIndex": { "type": "string", "example": "3", "description": "UV index" },
+                          "visibility": { "type": "string", "example": "10", "description": "Visibility in km" },
+                          "windspeedKmph": { "type": "string", "example": "13", "description": "Wind speed in km/h" },
+                          "winddir16Point": { "type": "string", "example": "WSW", "description": "Wind direction" },
+                          "winddirDegree": { "type": "string", "example": "240", "description": "Wind direction in degrees" },
+                          "weatherDesc": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "value": { "type": "string", "example": "Partly cloudy", "description": "Weather description" }
+                              }
+                            }
+                          },
+                          "observation_time": { "type": "string", "example": "02:24 PM", "description": "Time of observation" }
+                        }
+                      }
+                    },
+                    "nearest_area": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "areaName": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "value": { "type": "string", "example": "Hamburg", "description": "City name" }
+                              }
+                            }
+                          },
+                          "country": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "value": { "type": "string", "example": "Germany", "description": "Country name" }
+                              }
+                            }
+                          },
+                          "latitude": { "type": "string", "example": "53.550", "description": "Latitude coordinate" },
+                          "longitude": { "type": "string", "example": "9.993", "description": "Longitude coordinate" }
+                        }
+                      }
+                    },
+                    "weather": {
+                      "type": "array",
+                      "description": "3-day weather forecast",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": { "type": "string", "example": "2025-06-01", "description": "Forecast date" },
+                          "maxtempC": { "type": "string", "example": "18", "description": "Maximum temperature in Celsius" },
+                          "maxtempF": { "type": "string", "example": "64", "description": "Maximum temperature in Fahrenheit" },
+                          "mintempC": { "type": "string", "example": "12", "description": "Minimum temperature in Celsius" },
+                          "mintempF": { "type": "string", "example": "54", "description": "Minimum temperature in Fahrenheit" },
+                          "totalSnow_cm": { "type": "string", "example": "0.0", "description": "Total snow in cm" },
+                          "sunHour": { "type": "string", "example": "6.2", "description": "Hours of sunshine" },
+                          "uvIndex": { "type": "string", "example": "4", "description": "UV index for the day" },
+                          "hourly": {
+                            "type": "array",
+                            "description": "Hourly forecast for the day (every 3 hours)",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "time": { "type": "string", "example": "600", "description": "Hour in 24h format (600 = 6:00 AM)" },
+                                "tempC": { "type": "string", "example": "14", "description": "Temperature in Celsius" },
+                                "tempF": { "type": "string", "example": "57", "description": "Temperature in Fahrenheit" },
+                                "windspeedKmph": { "type": "string", "example": "11", "description": "Wind speed in km/h" },
+                                "weatherDesc": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "value": { "type": "string", "example": "Cloudy", "description": "Weather description" }
+                                    }
+                                  }
+                                },
+                                "precipMM": { "type": "string", "example": "0.0", "description": "Precipitation in mm" },
+                                "humidity": { "type": "string", "example": "78", "description": "Humidity percentage" },
+                                "chanceofrain": { "type": "string", "example": "15", "description": "Chance of rain percentage" },
+                                "chanceofsnow": { "type": "string", "example": "0", "description": "Chance of snow percentage" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "City not found or invalid location",
+            "content": {
+              "text/plain": {
+                "example": "Unknown location: invalidcity"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

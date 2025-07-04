@@ -1,0 +1,75 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Find Specific Supply Chain Event",
+    "version": "1.0.0",
+    "description": "Searches for a specific supply chain event by Event ID from all recent events."
+  },
+  "servers": [
+    {
+      "url": "https://wx-supply-chain-backend.1944johjccn7.eu-de.codeengine.appdomain.cloud",
+      "description": "Merck Supply Chain Backend"
+    }
+  ],
+  "paths": {
+    "/events": {
+      "get": {
+        "summary": "Get all events to search for specific Event ID",
+        "description": "Retrieves all recent events. Agent will filter client-side to find specific Event ID like EVT-8ed827b7.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of events to search through",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10000,
+              "minimum": 1,
+              "maximum": 10000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All events returned for filtering",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "event_id": { "type": "string", "example": "EVT-8ed827b7" },
+                      "timestamp": { "type": "string", "format": "date-time" },
+                      "supplier_id": { "type": "string", "example": "SUP-001" },
+                      "supplier_name": { "type": "string", "example": "Acme PharmaChem" },
+                      "material_id": { "type": "string", "example": "MAT-321" },
+                      "material_description": { "type": "string", "example": "Excipient Y" },
+                      "event_type": { "type": "string", "example": "transport_strike" },
+                      "delay_hours": { "type": "integer", "nullable": true, "example": 12 },
+                      "eta_original": { "type": "string", "format": "date-time", "nullable": true },
+                      "eta_new": { "type": "string", "format": "date-time", "nullable": true },
+                      "location": { "type": "string", "nullable": true, "example": "Munich Rail Terminal" },
+                      "disruption_reason": { "type": "string", "nullable": true, "example": "Transport workers on strike" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Failed to fetch events from database"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

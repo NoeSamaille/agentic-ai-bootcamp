@@ -1,0 +1,114 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Stack Overflow API",
+    "version": "1.0.0",
+    "description": "Developer community insights and trending technologies"
+  },
+  "servers": [
+    {
+      "url": "https://api.stackexchange.com/2.3",
+      "description": "Stack Exchange API"
+    }
+  ],
+  "paths": {
+    "/questions": {
+      "get": {
+        "summary": "Search Stack Overflow questions",
+        "description": "Find trending developer questions and technologies",
+        "parameters": [
+          {
+            "name": "tagged",
+            "in": "query",
+            "description": "Tags to search for (e.g., 'productivity', 'automation')",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "productivity"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "week"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort direction",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "pagesize",
+            "in": "query",
+            "description": "Number of results",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "site",
+            "in": "query",
+            "description": "Stack Exchange site",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "stackoverflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stack Overflow questions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "question_id": {"type": "integer"},
+                          "title": {"type": "string"},
+                          "body": {"type": "string"},
+                          "link": {"type": "string"},
+                          "score": {"type": "integer"},
+                          "view_count": {"type": "integer"},
+                          "answer_count": {"type": "integer"},
+                          "creation_date": {"type": "integer"},
+                          "tags": {
+                            "type": "array",
+                            "items": {"type": "string"}
+                          },
+                          "owner": {
+                            "type": "object",
+                            "properties": {
+                              "display_name": {"type": "string"}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
