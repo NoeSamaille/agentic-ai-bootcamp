@@ -12,13 +12,15 @@
 
 ## Step 2: Access watsonx.ai
 
-1. From the top left menu on the [IBM Cloud Dashboard](https://cloud.ibm.com/), click **watsonx**:
-    ![IBM Cloud account](./assets/4-click-watsonx.png)
-2. Under **watsonx**, click the **Launch** button:
+1. From the top left menu on the [IBM Cloud Dashboard](https://cloud.ibm.com/), click **Resource list**:
+    ![IBM Cloud account](./assets/8-resource-list.png)
+2. In the resource list, expand **AI / Machine Learning** and click your **watsonx.ai Runtime** instance (in **Dallas** region):
+    ![IBM Cloud account](./assets/4-resource-list-watsonx-ai.png)
+3. From the watsonx.ai Runtime service page, click **Launch in**:
     ![IBM Cloud account](./assets/5-watsonx-launch.png)
-3. Select the **Dallas (us-south)** region, login with the same email from above step and click **Login**:
-    ![IBM Cloud account](./assets/6-watsonx-login.png)
-4. That's it, you should now be in the watsonx.ai dashboard and ready to proceed to **Agent Lab**!
+4. Follow the steps and wait to be in Cloud Pak for Data dashboard, then click **watsonx** on the top right menu to be redirected to **watsonx.ai**:
+    ![IBM Cloud account](./assets/6-cpd-navigate-watsonx.png)
+5. That's it, you should now be in the watsonx.ai dashboard and ready to proceed to **Agent Lab**!
     ![IBM Cloud account](./assets/7-watsonx-dashboard.png)
 
 ## Step 3: Access watsonx Orchestrate
