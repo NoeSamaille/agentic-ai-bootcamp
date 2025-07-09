@@ -18,7 +18,7 @@ In this bootcamp, you will build and deploy an Agentic AI application prototype 
    2. **watsonx Orchestrate Agent Builder**
         - [Banking Agent (low-code)](./industrial-use-cases/orchestrate/banking_low-code)
    3. **watsonx.ai AI Services**
-        - [Custom LangGraph Research agent](./industrial-use-cases/orchestrate/banking_low-code)
+        - [Custom LangGraph Research agent](https://www.ibm.com/watsonx/developer/agents/quickstart/)
 2. You still have time and want to explore more? **Pick Your Labs** from the following list of enterprise use cases: general or industry-specific and learn about the business story, and implement it using the hands-on step-by-step guides:
 
 - [**General Use Cases**](./general-use-cases/)
