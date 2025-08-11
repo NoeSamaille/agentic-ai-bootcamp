@@ -15,8 +15,8 @@ In this bootcamp, you will build and deploy an Agentic AI application prototype 
 1. Go through the recommended labs:
    1. **watsonx Orchestrate Agent Builder** [Banking Agent (low-code)](./industrial-use-cases/orchestrate/banking_low-code)
    2. Out-of-the-box integrations:
-      1. [Microsoft Outlook (low-code)](./general-use-cases/orchestrate/ootb-integrations/MS-Outlook/)
-      2. [Microsoft Sharepoint (low-code)](./general-use-cases/orchestrate/ootb-integrations/sharepoint-file-management/)
+      1. [Microsoft Sharepoint (low-code)](./general-use-cases/orchestrate/ootb-integrations/sharepoint-file-management/)
+      2. [Microsoft Outlook (low-code)](./general-use-cases/orchestrate/ootb-integrations/MS-Outlook/)
       3. [Jira (low-code)](./general-use-cases/orchestrate/ootb-integrations/jira-task-managment/)
    3. [watsonx Orchestrate ADK (low-code)](./industrial-use-cases/orchestrate/employee-success-adk/)
 2. You still have time and want to explore more? **Pick Your Labs** from the following list of enterprise use cases: general or industry-specific and learn about the business story, and implement it using the hands-on step-by-step guides:
